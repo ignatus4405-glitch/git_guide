@@ -33,33 +33,36 @@ mimetypes.add_type("text/plain; charset=utf-8", ".txt")
 
 
 class Handler(http.server.SimpleHTTPRequestHandler):
-    """Отдаёт файлы сборки; неизвестные пути → 404.html."""
+    """Отдаёт файлы сборки; неизвестные пути → 404.html, каталоги без index — тоже 404."""
 
     server_version = "GitGuidePreview/1.0"
 
     def send_head(self):
-        path = self.translate_path(self.path)
-        target = Path(path)
+        target = Path(self.translate_path(self.path))
         if target.is_dir():
             index = target / "index.html"
             if index.exists():
-                self.path = str(index.relative_to(self.directory))
+                self.path = "/" + index.relative_to(self.directory).as_posix()
             else:
-                return self.send_error(404, "Каталог без index.html", self.error_page())
+                self.send_error(404, "В каталоге нет index.html")
+                return None
         elif not target.exists():
-            return self.send_error(404, "Страница не найдена", self.error_page())
+            self.send_error(404, "Страница не найдена")
+            return None
         return super().send_head()
 
-    def error_page(self) -> str:
-        page = Path(self.directory) / "404.html"
-        return page.read_text(encoding="utf-8") if page.exists() else "404"
-
     def send_error(self, code, message=None, explain=None):
-        if code == 404 and explain:
+        """Для 404 отдаём собранную страницу 404.html (как это делает GitHub Pages)."""
+        page = Path(self.directory) / "404.html"
+        if code == 404 and page.exists():
+            body = page.read_bytes()
             self.send_response(404)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
             self.end_headers()
-            return self.wfile.write(explain.encode("utf-8"))
+            if self.command != "HEAD":
+                self.wfile.write(body)
+            return None
         return super().send_error(code, message, explain)
 
     def log_message(self, fmt, *args):  # тише лог: только код и путь
