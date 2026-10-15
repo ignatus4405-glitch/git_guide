@@ -117,8 +117,8 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: {python-version: "3.12"}
       - run: python3 tools/test_build.py
 ```
@@ -130,11 +130,11 @@ permissions: {contents: read, pages: write, id-token: write}
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps: [checkout, build, actions/upload-pages-artifact@v3]
+    steps: [checkout, build, actions/upload-pages-artifact@v5]
   deploy:
     needs: build
     environment: {name: github-pages, url: "${{ steps.deployment.outputs.page_url }}"}
-    steps: [{uses: actions/deploy-pages@v4, id: deployment}]
+    steps: [{uses: actions/deploy-pages@v5, id: deployment}]
 ```
 
 ## Оформление репозитория

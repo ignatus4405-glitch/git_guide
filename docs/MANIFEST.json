@@ -11,8 +11,8 @@
   "build": {
     "command": "python3 build.py",
     "output": "site/",
-    "built_at": "2026-10-15 20:53 UTC",
-    "revision": "4465386",
+    "built_at": "2026-10-15 20:55 UTC",
+    "revision": "f2b86d4",
     "branch": "arena/0008ff39-git-guide",
     "files_written": 44,
     "warnings": []

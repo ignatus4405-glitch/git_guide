@@ -43,8 +43,8 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with: {python-version: "3.12"}
       - run: python3 tools/validate.py --strict
   test:
@@ -57,7 +57,7 @@ jobs:
       - checkout, setup-python
       - run: python3 build.py
       - run: python3 tools/validate.py --site site    # проверка всех внутренних ссылок
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with: {name: site-${{ github.sha }}, path: site/}
 ```
 
@@ -85,10 +85,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@v7
+      - uses: actions/configure-pages@v6
       - run: python3 build.py
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with: {path: site}
   deploy:
     needs: build
@@ -99,7 +99,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 ```
 
 Тонкости, которые видно только на практике:
@@ -128,7 +128,7 @@ push в `main` (или ручной запуск workflow `pages`) опубли�
 permissions:
   contents: write
 steps:
-  - uses: actions/checkout@v5
+  - uses: actions/checkout@v7
     with: {fetch-depth: 0}          # история нужна, чтобы даты файлов были верными
   - run: python3 build.py
   - run: |

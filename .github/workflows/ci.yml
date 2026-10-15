@@ -24,8 +24,8 @@ jobs:
     name: Проверка контента
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Зависимости не нужны — только стандартная библиотека
@@ -38,8 +38,8 @@ jobs:
     name: Самотесты сборки
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Прогнать тесты генератора (35 проверок)
@@ -51,10 +51,10 @@ jobs:
     needs: [validate, test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # нужна история: даты уроков берутся из git log
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Собрать сайт (контент → HTML, схемы, поиск, sitemap)
@@ -75,7 +75,7 @@ jobs:
           print(f"- Файлов в сборке: **{len(info['files'])}**, предупреждений: **{len(info['warnings'])}**")
           PY
       - name: Загрузить сайт как артефакт
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: site-${{ github.sha }}
           path: site

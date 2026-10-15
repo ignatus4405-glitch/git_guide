@@ -31,8 +31,8 @@ jobs:
             experimental: true
     continue-on-error: ${{ matrix.experimental || false }}
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python }}
       - run: python3 tools/test_build.py
@@ -47,7 +47,7 @@ jobs:
 ## Кэш: экономия минут и времени
 
 ```yaml title="Кэш зависимостей"
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   id: pip-cache
   with:
     path: ~/.cache/pip
@@ -73,9 +73,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - run: python3 build.py
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: site-${{ github.sha }}
           path: site/
@@ -86,8 +86,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
         with:
           name: site-${{ github.sha }}
           path: site
@@ -129,7 +129,7 @@ jobs:
 
 1. **Не печатайте секреты.** `echo` может раскрыть значение в логах; маскирование работает не всегда (например, после base64).
 2. **Не передавайте секреты в PR из форков.** Для внешних PR `secrets.*` пусты, кроме `GITHUB_TOKEN` с правами только на чтение.
-3. **Пиньте версии action-ов** (`uses: actions/checkout@v5` — минимум; для критичных — по SHA).
+3. **Пиньте версии action-ов** (`uses: actions/checkout@v7` — минимум; для критичных — по SHA).
 4. **Используйте OIDC** вместо долгоживущих токенов облака: `permissions: id-token: write` и обмен на временные креды.
 5. **Проверяйте `pull_request_target`.** Этот триггер даёт права на запись и легко превращается в уязвимость, если в нём запускать код из PR.
 

@@ -34,6 +34,18 @@
 - **Качество:** валидатор контента и ссылок (105 проверок), 35 самотестов сборки,
   `.gitattributes`, `.editorconfig`, `pre-commit`-конфигурация, Dependabot для Actions.
 
+### Исправлено
+
+- `pages.yml`: шаг вывода адреса сайта переведён в блок-скаляр — строка `run:` с двоеточием
+  внутри делала YAML невалидным, из-за чего прогон завершался ошибкой «workflow file issue».
+- Версии действий обновлены до актуальных мажоров: `actions/checkout@v7`,
+  `actions/setup-python@v7`, `actions/upload-artifact@v7`, `actions/download-artifact@v8`,
+  `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5`, `actions/deploy-pages@v5`,
+  `actions/cache@v6`, `aws-actions/configure-aws-credentials@v6` (то же — в текстах уроков
+  модулей 5–8 и в шпаргалке).
+- Все workflow проверены схемой GitHub Workflows (`check-jsonschema --builtin-schema
+  vendor.github-workflows`), чтобы такие ошибки не доходили до прогона.
+
 ### Примечания
 
 - Курс собирается на «голом» Python 3.10+: сторонних пакетов нет.

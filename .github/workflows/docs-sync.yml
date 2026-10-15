@@ -5,6 +5,10 @@
 # в main workflow пересобирает курс и коммитит изменения документации.
 #
 # Важно: коммит содержит [skip ci], иначе он запустит этот workflow снова — и так по кругу.
+#
+# Примечание: если в репозитории включена защита ветки с обязательным Pull Request,
+# прямой push бота будет отклонён. В этом случае либо разрешите боту push (bypass list),
+# либо превратите этот workflow в создание PR с обновлённой документацией.
 name: Синхронизация документации
 
 on:
@@ -24,10 +28,10 @@ jobs:
     name: Обновить docs/STATE.md и docs/MANIFEST.json
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0 # полная история нужна, чтобы даты уроков брались из git log
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Пересобрать курс (обновляет документацию состояния)

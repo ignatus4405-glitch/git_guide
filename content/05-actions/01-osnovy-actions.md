@@ -43,7 +43,7 @@ jobs:
     name: Поздороваться
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5        # копирует репозиторий на runner
+      - uses: actions/checkout@v7        # копирует репозиторий на runner
       - name: Показать файлы
         run: ls -la
       - name: Проверить, что README не пустой
@@ -115,7 +115,7 @@ jobs:
 
 | Симптом | Причина | Решение |
 | --- | --- | --- |
-| `sh: 1: python: not found` | не установлен нужный рантайм | `actions/setup-python@v6` / `setup-node@v4` |
+| `sh: 1: python: not found` | не установлен нужный рантайм | `actions/setup-python@v7` / `setup-node@v4` |
 | Файлы не найдены | забыли `actions/checkout` или указан не тот каталог | добавить checkout, проверить `defaults.run.working-directory` |
 | Workflow не запускается | неверный путь файла или отступ в YAML | файл строго в `.github/workflows/`, проверить YAML-линтером |
 | `Permission denied` при push | у токена `contents: read` по умолчанию | явно указать `permissions: contents: write` (осторожно) |

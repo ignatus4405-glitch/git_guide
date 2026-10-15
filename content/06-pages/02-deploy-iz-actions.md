@@ -33,8 +33,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-python@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Собрать сайт
@@ -42,9 +42,9 @@ jobs:
       - name: Проверить ссылки в собранном сайте
         run: python3 tools/validate.py --site site
       - name: Конфигурация Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Загрузить артефакт
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
@@ -60,7 +60,7 @@ jobs:
     steps:
       - name: Опубликовать
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 ```
 
 ## Что здесь происходит по шагам
@@ -76,7 +76,7 @@ jobs:
 | `deploy-pages` | собственно публикация; возвращает `page_url` |
 
 ::: tip Как передать параметры Pages в сборку
-`actions/configure-pages@v5` с `id: pages` даёт `steps.pages.outputs.base_path` — удобно,
+`actions/configure-pages@v6` с `id: pages` даёт `steps.pages.outputs.base_path` — удобно,
 если генератор умеет принимать базовый путь. Тогда сайт корректно работает из подкаталога.
 :::
 
@@ -119,7 +119,7 @@ gh workflow run pages.yml       # ручной запуск публикации
 ## Кэш и оптимизация
 
 ```yaml
-- uses: actions/cache@v4
+- uses: actions/cache@v6
   with:
     path: ~/.cache/pip
     key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
