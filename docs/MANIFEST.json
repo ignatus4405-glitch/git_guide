@@ -1,0 +1,871 @@
+{
+  "$schema": "docs/manifest.schema.json",
+  "project": {
+    "title": "Git и GitHub: полный курс",
+    "version": "1.0.0",
+    "repo": "https://github.com/ignatus4405-glitch/git_guide",
+    "base_url": "https://ignatus4405-glitch.github.io/git_guide",
+    "license": "MIT",
+    "lang": "ru"
+  },
+  "build": {
+    "command": "python3 build.py",
+    "output": "site/",
+    "built_at": "2026-10-15 20:53 UTC",
+    "revision": "4465386",
+    "branch": "arena/0008ff39-git-guide",
+    "files_written": 44,
+    "warnings": []
+  },
+  "stats": {
+    "modules": 8,
+    "lessons": 24,
+    "pages": 7,
+    "words": 15998,
+    "minutes": 99,
+    "quizzes": 24,
+    "code_blocks": 161
+  },
+  "modules": [
+    {
+      "id": "git-osnovy",
+      "dir": "content/01-osnovy",
+      "title": "Основы Git",
+      "icon": "🌱",
+      "level": "Новичок",
+      "lessons": 3,
+      "minutes": 10,
+      "words": 1622,
+      "quizzes": 3,
+      "url": "module/git-osnovy/index.html"
+    },
+    {
+      "id": "istoriya",
+      "dir": "content/02-istoriya",
+      "title": "История, ветки, отмена",
+      "icon": "🌿",
+      "level": "Новичок",
+      "lessons": 4,
+      "minutes": 11,
+      "words": 1772,
+      "quizzes": 4,
+      "url": "module/istoriya/index.html"
+    },
+    {
+      "id": "github",
+      "dir": "content/03-github",
+      "title": "GitHub: репозитории и Pull Request",
+      "icon": "🐙",
+      "level": "Средний",
+      "lessons": 3,
+      "minutes": 9,
+      "words": 1503,
+      "quizzes": 3,
+      "url": "module/github/index.html"
+    },
+    {
+      "id": "komanda",
+      "dir": "content/04-komanda",
+      "title": "Командная работа",
+      "icon": "🤝",
+      "level": "Средний",
+      "lessons": 2,
+      "minutes": 7,
+      "words": 1090,
+      "quizzes": 2,
+      "url": "module/komanda/index.html"
+    },
+    {
+      "id": "actions",
+      "dir": "content/05-actions",
+      "title": "GitHub Actions: CI/CD",
+      "icon": "⚙️",
+      "level": "Продвинутый",
+      "lessons": 3,
+      "minutes": 10,
+      "words": 1546,
+      "quizzes": 3,
+      "url": "module/actions/index.html"
+    },
+    {
+      "id": "pages",
+      "dir": "content/06-pages",
+      "title": "Публикация на GitHub Pages",
+      "icon": "🚀",
+      "level": "Средний",
+      "lessons": 2,
+      "minutes": 6,
+      "words": 926,
+      "quizzes": 2,
+      "url": "module/pages/index.html"
+    },
+    {
+      "id": "bezopasnost",
+      "dir": "content/07-bezopasnost",
+      "title": "Безопасность и секреты",
+      "icon": "🛡️",
+      "level": "Средний",
+      "lessons": 3,
+      "minutes": 10,
+      "words": 1643,
+      "quizzes": 3,
+      "url": "module/bezopasnost/index.html"
+    },
+    {
+      "id": "prodvinutye",
+      "dir": "content/08-prodvinutye",
+      "title": "Продвинутые приёмы",
+      "icon": "🧙",
+      "level": "Продвинутый",
+      "lessons": 4,
+      "minutes": 13,
+      "words": 2036,
+      "quizzes": 4,
+      "url": "module/prodvinutye/index.html"
+    }
+  ],
+  "lessons": [
+    {
+      "slug": "chto-takoe-git",
+      "module": "git-osnovy",
+      "order": 1,
+      "title": "Что такое Git и зачем нужен GitHub",
+      "summary": "Разбираем, какую задачу решает система контроля версий, чем распределённый Git отличается от централизованных систем и какую роль играет GitHub.",
+      "url": "module/git-osnovy/chto-takoe-git.html",
+      "source": "content/01-osnovy/01-chto-takoe-git.md",
+      "words": 561,
+      "minutes": 4,
+      "code_blocks": 1,
+      "quizzes": 1,
+      "goals": [
+        "Объяснить своими словами, что такое система контроля версий и какие задачи она решает",
+        "Различать локальный репозиторий Git и удалённый хостинг вроде GitHub",
+        "Понять, почему в Git «коммит» — это снимок, а не набор изменений"
+      ],
+      "tags": [
+        "git",
+        "основы",
+        "github"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "ustanovka-i-nastroyka",
+      "module": "git-osnovy",
+      "order": 2,
+      "title": "Установка и настройка Git",
+      "summary": "Ставим Git на macOS, Linux и Windows, настраиваем имя, почту, редактор и подключение к GitHub через SSH или токен.",
+      "url": "module/git-osnovy/ustanovka-i-nastroyka.html",
+      "source": "content/01-osnovy/02-ustanovka-i-nastroyka.md",
+      "words": 505,
+      "minutes": 3,
+      "code_blocks": 12,
+      "quizzes": 1,
+      "goals": [
+        "Установить Git и проверить версию командой git --version",
+        "Настроить глобальные параметры user.name, user.email, init.defaultBranch и редактор",
+        "Подключиться к GitHub по SSH и проверить доступ командой ssh -T git@github.com"
+      ],
+      "tags": [
+        "git",
+        "настройка",
+        "ssh",
+        "cli"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "pervyy-repozitoriy",
+      "module": "git-osnovy",
+      "order": 3,
+      "title": "Первый репозиторий и первый коммит",
+      "summary": "Создаём репозиторий, разбираем три области Git, учимся читать git status и diff, делаем осмысленный коммит и публикуем его на GitHub.",
+      "url": "module/git-osnovy/pervyy-repozitoriy.html",
+      "source": "content/01-osnovy/03-pervyy-repozitoriy.md",
+      "words": 556,
+      "minutes": 3,
+      "code_blocks": 8,
+      "quizzes": 1,
+      "goals": [
+        "Создать репозиторий через git init и понять, что появилось в .git",
+        "Читать вывод git status и отличать рабочую копию от области подготовки",
+        "Сделать коммит с осмысленным сообщением и отправить его на GitHub",
+        "Настроить .gitignore и не коммитить лишнее"
+      ],
+      "tags": [
+        "git",
+        "коммит",
+        "status",
+        "gitignore"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "istoriya-i-log",
+      "module": "istoriya",
+      "order": 1,
+      "title": "История коммитов: как читать git log",
+      "summary": "Учимся читать историю как граф: форматы git log, поиск по изменениям, git show и blame, понимание SHA и HEAD.",
+      "url": "module/istoriya/istoriya-i-log.html",
+      "source": "content/02-istoriya/01-istoriya-i-log.md",
+      "words": 403,
+      "minutes": 3,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "{'Читать историю в трёх форматах': 'подробном, однострочном и графе'}",
+        "Находить нужный коммит через --grep, -S и git blame",
+        "Понимать, что означают HEAD, ref и SHA в выводе git log"
+      ],
+      "tags": [
+        "git",
+        "log",
+        "история"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "vetki-i-sliyaniya",
+      "module": "istoriya",
+      "order": 2,
+      "title": "Ветки и слияния",
+      "summary": "Ветка — подвижная метка на коммит. Учимся создавать ветки, переключаться между задачами и сливать изменения без сюрпризов.",
+      "url": "module/istoriya/vetki-i-sliyaniya.html",
+      "source": "content/02-istoriya/02-vetki-i-sliyaniya.md",
+      "words": 470,
+      "minutes": 3,
+      "code_blocks": 7,
+      "quizzes": 1,
+      "goals": [
+        "Создавать и переключать ветки командами git switch -c и git switch",
+        "Понимать разницу между fast-forward и настоящим merge-коммитом",
+        "Удалять слитые ветки и не терять работу"
+      ],
+      "tags": [
+        "git",
+        "ветки",
+        "merge"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "konflikty",
+      "module": "istoriya",
+      "order": 3,
+      "title": "Конфликты слияния: разбор без паники",
+      "summary": "Как понять маркеры конфликта, выбрать правильное решение, использовать инструменты вроде git rerere и mergetool и не потерять работу.",
+      "url": "module/istoriya/konflikty.html",
+      "source": "content/02-istoriya/03-konflikty.md",
+      "words": 499,
+      "minutes": 3,
+      "code_blocks": 4,
+      "quizzes": 1,
+      "goals": [
+        "Объяснить, почему возникает конфликт и почему Git не может выбрать сам",
+        "Читать маркеры <<<<<<< ======= >>>>>>> и сводить версии осознанно",
+        "Использовать git status, git checkout --ours/--theirs и git mergetool",
+        "Настроить rerere, чтобы не решать один и тот же конфликт дважды"
+      ],
+      "tags": [
+        "git",
+        "конфликты",
+        "merge"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "otmena-i-rebase",
+      "module": "istoriya",
+      "order": 4,
+      "title": "rebase, отмена и спасение работы",
+      "summary": "Осознанный выбор между merge и rebase, интерактивный rebase, отмена изменений через restore, reset, revert, stash и reflog.",
+      "url": "module/istoriya/otmena-i-rebase.html",
+      "source": "content/02-istoriya/04-otmena-i-rebase.md",
+      "words": 400,
+      "minutes": 2,
+      "code_blocks": 8,
+      "quizzes": 1,
+      "goals": [
+        "Осознанно выбирать между merge и rebase и объяснять последствия для истории",
+        "Использовать интерактивный rebase для чистки коммитов перед PR",
+        "{'Отменять изменения на нужном уровне': 'restore, reset, revert'}",
+        "Находить «потерянные» коммиты в reflog и восстанавливать их"
+      ],
+      "tags": [
+        "git",
+        "rebase",
+        "reset",
+        "revert",
+        "reflog"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "remote-i-sinhronizatsiya",
+      "module": "github",
+      "order": 1,
+      "title": "Удалённые репозитории и синхронизация",
+      "summary": "origin, upstream, fetch против pull, что происходит с ветками при клонировании, как работать с форками и не терять коммиты.",
+      "url": "module/github/remote-i-sinhronizatsiya.html",
+      "source": "content/03-github/01-remote-i-sinhronizatsiya.md",
+      "words": 450,
+      "minutes": 3,
+      "code_blocks": 6,
+      "quizzes": 1,
+      "goals": [
+        "Объяснить, чем отличаются fetch и pull, и когда что использовать",
+        "Настроить несколько remote-ов (origin и upstream) и синхронизировать форк",
+        "Безопасно разрешать расхождение локальной и удалённой ветки"
+      ],
+      "tags": [
+        "github",
+        "remote",
+        "fetch",
+        "pull",
+        "форк"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "pull-request",
+      "module": "github",
+      "order": 2,
+      "title": "Pull Request: полный цикл",
+      "summary": "От ветки до слияния: как создать PR, что писать в описании, как проходят ревью, какие бывают стратегии слияния и что делать после merge.",
+      "url": "module/github/pull-request.html",
+      "source": "content/03-github/02-pull-request.md",
+      "words": 521,
+      "minutes": 3,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "{'Провести полный цикл Pull Request': 'ветка, push, описание, ревью, слияние'}",
+        "Понимать разницу между merge, squash и rebase при слиянии PR",
+        "Связывать PR с задачами и использовать черновики для незаконченной работы"
+      ],
+      "tags": [
+        "github",
+        "pull-request",
+        "ревью"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "gh-cli-i-flow",
+      "module": "github",
+      "order": 3,
+      "title": "GitHub Flow и gh CLI",
+      "summary": "Модель ветвления GitHub Flow, защита веток и правила слияния, а также GitHub CLI — все действия GitHub из терминала.",
+      "url": "module/github/gh-cli-i-flow.html",
+      "source": "content/03-github/03-gh-cli-i-flow.md",
+      "words": 532,
+      "minutes": 3,
+      "code_blocks": 4,
+      "quizzes": 1,
+      "goals": [
+        "Описать модель GitHub Flow и объяснить, почему main всегда готова к релизу",
+        "{'Настроить защиту ветки main': 'обязательное ревью, статусы проверок, запрет force-push'}",
+        "{'Выполнять типовые операции GitHub через gh CLI': 'репозитории, PR, issues, релизы'}"
+      ],
+      "tags": [
+        "github",
+        "gh-cli",
+        "branch-protection",
+        "flow"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "code-review",
+      "module": "komanda",
+      "order": 1,
+      "title": "Code review: как проверять и как просить проверку",
+      "summary": "Чек-лист ревьюера, приёмы формулирования замечаний, работа с CODEOWNERS, обязательные проверки и культура обсуждения изменений.",
+      "url": "module/komanda/code-review.html",
+      "source": "content/04-komanda/01-code-review.md",
+      "words": 581,
+      "minutes": 4,
+      "code_blocks": 2,
+      "quizzes": 1,
+      "goals": [
+        "Проводить ревью по чек-листу, разделяя блокирующие и необязательные замечания",
+        "Формулировать замечания так, чтобы их принимали без споров",
+        "Настроить CODEOWNERS и шаблон PR, чтобы ревью приходило нужным людям"
+      ],
+      "tags": [
+        "review",
+        "команда",
+        "codeowners"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "issues-i-proekty",
+      "module": "komanda",
+      "order": 2,
+      "title": "Issues, Projects и шаблоны репозитория",
+      "summary": "Как вести задачи в GitHub: issues, метки, milestones, Projects, автоматизация через Actions, шаблоны issue и правила контрибьютинга.",
+      "url": "module/komanda/issues-i-proekty.html",
+      "source": "content/04-komanda/02-issues-i-proekty.md",
+      "words": 509,
+      "minutes": 3,
+      "code_blocks": 8,
+      "quizzes": 1,
+      "goals": [
+        "Формулировать issue так, чтобы её можно было взять в работу без уточнений",
+        "Использовать метки, milestones и Projects для планирования",
+        "Настроить шаблоны issue/PR и CONTRIBUTING, чтобы правила работали автоматически"
+      ],
+      "tags": [
+        "issues",
+        "projects",
+        "шаблоны",
+        "процесс"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "osnovy-actions",
+      "module": "actions",
+      "order": 1,
+      "title": "GitHub Actions: workflow, jobs, steps",
+      "summary": "Анатомия workflow: события, задания, шаги, runner-ы, контексты и выражения. Первый рабочий пайплайн и разбор типичных ошибок.",
+      "url": "module/actions/osnovy-actions.html",
+      "source": "content/05-actions/01-osnovy-actions.md",
+      "words": 476,
+      "minutes": 3,
+      "code_blocks": 4,
+      "quizzes": 1,
+      "goals": [
+        "{'Объяснить структуру workflow': 'on, jobs, steps, runs-on'}",
+        "Настроить запуск по push, pull_request, расписанию и вручную",
+        "Использовать контексты github.*, secrets.* и условные выражения if"
+      ],
+      "tags": [
+        "actions",
+        "ci",
+        "yaml",
+        "workflow"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "matrica-kesh-artefakty",
+      "module": "actions",
+      "order": 2,
+      "title": "Матрицы, кэш, артефакты и секреты",
+      "summary": "Тестирование на нескольких версиях, ускорение сборки кэшем, передача файлов между job-ами через артефакты и безопасная работа с секретами.",
+      "url": "module/actions/matrica-kesh-artefakty.html",
+      "source": "content/05-actions/02-matrica-kesh-artefakty.md",
+      "words": 492,
+      "minutes": 3,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "Запускать job в матрице версий и добавлять/исключать комбинации",
+        "Ускорять прогоны кэшем зависимостей и кэшем сборки",
+        "Передавать файлы между job-ами через артефакты и читать их из CLI",
+        "Правильно использовать секреты и переменные окружения"
+      ],
+      "tags": [
+        "actions",
+        "matrix",
+        "cache",
+        "artifacts",
+        "secrets"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "ci-kursa",
+      "module": "actions",
+      "order": 3,
+      "title": "Разбор: как собирается этот курс",
+      "summary": "Практикум на исходниках курса: workflow проверки, тестов, сборки, проверки ссылок и публикации на GitHub Pages — с разбором каждой строки.",
+      "url": "module/actions/ci-kursa.html",
+      "source": "content/05-actions/03-ci-kursa.md",
+      "words": 578,
+      "minutes": 4,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "Прочитать и объяснить workflow проверки, тестов и сборки этого репозитория",
+        "Понять, как сборка передаётся в job публикации и как включается Pages",
+        "Уметь адаптировать этот пайплайн под свой проект"
+      ],
+      "tags": [
+        "actions",
+        "ci",
+        "разбор",
+        "практика"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "pages-osnovy",
+      "module": "pages",
+      "order": 1,
+      "title": "GitHub Pages: что это и как включить",
+      "summary": "Статический хостинг внутри GitHub: источники публикации, выбор между веткой и Actions, свой домен, HTTPS и ограничения.",
+      "url": "module/pages/pages-osnovy.html",
+      "source": "content/06-pages/01-pages-osnovy.md",
+      "words": 419,
+      "minutes": 3,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "Объяснить, какие сайты подходят для Pages, а какие — нет",
+        "{'Выбрать источник публикации': 'ветка или GitHub Actions'}",
+        "Подключить свой домен и получить HTTPS"
+      ],
+      "tags": [
+        "pages",
+        "хостинг",
+        "домен"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "deploy-iz-actions",
+      "module": "pages",
+      "order": 2,
+      "title": "Публикация из GitHub Actions",
+      "summary": "Полный workflow сборки и деплоя на Pages: шаги, права, окружение, артефакт, откат и диагностика проблем публикации.",
+      "url": "module/pages/deploy-iz-actions.html",
+      "source": "content/06-pages/02-deploy-iz-actions.md",
+      "words": 507,
+      "minutes": 3,
+      "code_blocks": 4,
+      "quizzes": 1,
+      "goals": [
+        "Собрать workflow публикации на Pages с job-ами build и deploy",
+        "{'Объяснить, зачем нужны permissions pages': 'write и id-token: write'}",
+        "Диагностировать и откатывать неудачные публикации"
+      ],
+      "tags": [
+        "pages",
+        "actions",
+        "deploy",
+        "ci"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "autentifikatsiya",
+      "module": "bezopasnost",
+      "order": 1,
+      "title": "Аутентификация: ключи, токены, 2FA",
+      "summary": "SSH-ключи, fine-grained токены, GitHub Apps, SSH-агент, подпись коммитов — что выбрать и как не потерять доступ.",
+      "url": "module/bezopasnost/autentifikatsiya.html",
+      "source": "content/07-bezopasnost/01-autentifikatsiya.md",
+      "words": 538,
+      "minutes": 3,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "Выбрать подходящий способ аутентификации для ручной работы, скриптов и CI",
+        "Настроить SSH-агент и несколько ключей через ~/.ssh/config",
+        "Включить 2FA и понять, что меняется после этого"
+      ],
+      "tags": [
+        "безопасность",
+        "ssh",
+        "токены",
+        "2fa"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "sekrety-i-peremennye",
+      "module": "bezopasnost",
+      "order": 2,
+      "title": "Секреты в Actions и защита от утечек",
+      "summary": "GitHub Secrets, переменные, окружения с ручным подтверждением, OIDC, secret scanning и push protection — как сделать утечку невозможной.",
+      "url": "module/bezopasnost/sekrety-i-peremennye.html",
+      "source": "content/07-bezopasnost/02-sekrety-i-peremennye.md",
+      "words": 529,
+      "minutes": 3,
+      "code_blocks": 6,
+      "quizzes": 1,
+      "goals": [
+        "Различать секреты, переменные и токен GITHUB_TOKEN и выбирать подходящий инструмент",
+        "Настроить окружения с обязательным подтверждением перед деплоем",
+        "Включить secret scanning и push protection, чтобы блокировать утечки до push"
+      ],
+      "tags": [
+        "безопасность",
+        "secrets",
+        "actions",
+        "oidc",
+        "сканирование"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "istorii-i-utechki",
+      "module": "bezopasnost",
+      "order": 3,
+      "title": "История репозитория и утечки",
+      "summary": "Что делать, если секрет или большой файл попал в историю: git filter-repo, BFG, правила force-push, ротация ключей и защита ветвей.",
+      "url": "module/bezopasnost/istorii-i-utechki.html",
+      "source": "content/07-bezopasnost/03-istorii-i-utechki.md",
+      "words": 576,
+      "minutes": 4,
+      "code_blocks": 6,
+      "quizzes": 1,
+      "goals": [
+        "Оценить, нужно ли вообще переписывать историю, и чем это грозит",
+        "Удалить файл или секрет из всей истории с помощью git filter-repo",
+        "Правильно организовать force-push и оповестить команду после переписывания"
+      ],
+      "tags": [
+        "безопасность",
+        "filter-repo",
+        "история",
+        "утечки"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "hooki-i-shablon",
+      "module": "prodvinutye",
+      "order": 1,
+      "title": "Хуки, шаблоны и .gitattributes",
+      "summary": "Локальные и серверные хуки, управляемые через pre-commit, шаблоны commit message, .gitattributes и выравнивание переводов строк между ОС.",
+      "url": "module/prodvinutye/hooki-i-shablon.html",
+      "source": "content/08-prodvinutye/01-hooki-i-shablon.md",
+      "words": 438,
+      "minutes": 3,
+      "code_blocks": 8,
+      "quizzes": 1,
+      "goals": [
+        "Понимать, какие хуки есть в Git и чем клиентские отличаются от серверных",
+        "Настроить pre-commit с линтерами и проверками, работающими до коммита",
+        "Использовать .gitattributes для переводов строк, diff-драйверов и архивов"
+      ],
+      "tags": [
+        "hooks",
+        "pre-commit",
+        "gitattributes",
+        "качество"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "bolshie-fayly-i-podmoduli",
+      "module": "prodvinutye",
+      "order": 2,
+      "title": "Большие файлы, LFS, подмодули и частичные клоны",
+      "summary": "Что делать с тяжёлыми данными: Git LFS, git submodule, sparse-checkout и partial clone — плюс способы уменьшить уже раздутый репозиторий.",
+      "url": "module/prodvinutye/bolshie-fayly-i-podmoduli.html",
+      "source": "content/08-prodvinutye/02-bolshie-fayly-i-podmoduli.md",
+      "words": 517,
+      "minutes": 3,
+      "code_blocks": 5,
+      "quizzes": 1,
+      "goals": [
+        "{'Выбирать инструмент под задачу': 'LFS, подмодуль, частичный клон или внешнее хранилище'}",
+        "Настроить Git LFS и объяснить, что именно попадает в репозиторий",
+        "Клонировать большие репозитории быстрее через --filter, --depth и sparse-checkout"
+      ],
+      "tags": [
+        "lfs",
+        "submodule",
+        "клонирование",
+        "производительность"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "tegi-relizy-semver",
+      "module": "prodvinutye",
+      "order": 3,
+      "title": "Теги, релизы и semver",
+      "summary": "Семантическое версионирование, аннотированные теги, GitHub Releases, автогенерация changelog и автоматический релиз из Actions.",
+      "url": "module/prodvinutye/tegi-relizy-semver.html",
+      "source": "content/08-prodvinutye/03-tegi-relizy-semver.md",
+      "words": 517,
+      "minutes": 3,
+      "code_blocks": 4,
+      "quizzes": 1,
+      "goals": [
+        "Применять семантическое версионирование и объяснять, когда какая цифра меняется",
+        "Создавать аннотированные теги и выпускать релизы на GitHub",
+        "Настроить автоматический релиз с автоматическим changelog в Actions"
+      ],
+      "tags": [
+        "теги",
+        "релизы",
+        "semver",
+        "actions"
+      ],
+      "updated": "2026-10-15"
+    },
+    {
+      "slug": "git-iznutri",
+      "module": "prodvinutye",
+      "order": 4,
+      "title": "Git изнутри: объекты, ссылки, упаковка",
+      "summary": "Как устроено хранилище .git: блобы, деревья, коммиты и теги, ссылки, packfiles, git cat-file, hash-object и fsck — отладка на уровне объектов.",
+      "url": "module/prodvinutye/git-iznutri.html",
+      "source": "content/08-prodvinutye/04-git-iznutri.md",
+      "words": 564,
+      "minutes": 4,
+      "code_blocks": 6,
+      "quizzes": 1,
+      "goals": [
+        "Объяснить, что физически лежит в каталоге .git и как связаны объекты",
+        "Пользоваться git cat-file, hash-object и ls-tree для разбора репозитория",
+        "Понимать, зачем нужны packfiles и когда помогает git gc, git fsck, git bundle"
+      ],
+      "tags": [
+        "git",
+        "internals",
+        "объекты",
+        "packfile",
+        "отладка"
+      ],
+      "updated": "2026-10-15"
+    }
+  ],
+  "pages": [
+    {
+      "slug": "karta-kursa",
+      "title": "Карта курса",
+      "url": "karta-kursa.html",
+      "source": "content/pages/karta-kursa.md",
+      "nav": true,
+      "order": 1
+    },
+    {
+      "slug": "shpargalka",
+      "title": "Шпаргалка по Git и GitHub",
+      "url": "shpargalka.html",
+      "source": "content/pages/shpargalka.md",
+      "nav": true,
+      "order": 2
+    },
+    {
+      "slug": "slovar",
+      "title": "Словарь терминов",
+      "url": "slovar.html",
+      "source": "content/pages/slovar.md",
+      "nav": true,
+      "order": 3
+    },
+    {
+      "slug": "oshibki",
+      "title": "20 типичных ошибок и как их исправить",
+      "url": "oshibki.html",
+      "source": "content/pages/oshibki.md",
+      "nav": true,
+      "order": 4
+    },
+    {
+      "slug": "ekzamen",
+      "title": "Итоговый экзамен курса",
+      "url": "ekzamen.html",
+      "source": "content/pages/ekzamen.md",
+      "nav": true,
+      "order": 5
+    },
+    {
+      "slug": "resursy",
+      "title": "Материалы и что дальше",
+      "url": "resursy.html",
+      "source": "content/pages/resursy.md",
+      "nav": true,
+      "order": 6
+    },
+    {
+      "slug": "index",
+      "title": "Курс «Git и GitHub»",
+      "url": "index.html",
+      "source": "content/pages/index.md",
+      "nav": false,
+      "order": 999
+    }
+  ],
+  "diagrams": [
+    {
+      "file": "assets/img/diagrams/three-trees.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "three_trees"
+    },
+    {
+      "file": "assets/img/diagrams/commit-internals.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "commit_internals"
+    },
+    {
+      "file": "assets/img/diagrams/branches-merge.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "branches_merge"
+    },
+    {
+      "file": "assets/img/diagrams/merge-vs-rebase.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "merge_vs_rebase"
+    },
+    {
+      "file": "assets/img/diagrams/conflict-resolution.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "conflict_resolution"
+    },
+    {
+      "file": "assets/img/diagrams/reset-vs-revert.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "reset_vs_revert"
+    },
+    {
+      "file": "assets/img/diagrams/remote-and-pr.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "remote_and_pr"
+    },
+    {
+      "file": "assets/img/diagrams/actions-pipeline.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "actions_pipeline"
+    },
+    {
+      "file": "assets/img/diagrams/workflows-compare.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "workflows_compare"
+    },
+    {
+      "file": "assets/img/diagrams/security-layers.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "security_layers"
+    },
+    {
+      "file": "assets/img/diagrams/lesson-anatomy.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "lesson_anatomy"
+    },
+    {
+      "file": "assets/img/diagrams/fork-sync.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "fork_sync"
+    },
+    {
+      "file": "assets/img/diagrams/large-files.svg",
+      "generator": "tools/gen_diagrams.py",
+      "function": "submodule_or_lfs"
+    }
+  ],
+  "infrastructure": {
+    "site.yml": "метаданные сайта: заголовок, версия, базовый URL, цвета",
+    "build.py": "точка входа сборки",
+    "tools/": "модули сборки: markdown, подсветка, шаблоны, схемы, проверки",
+    "assets/": "статические файлы: css, js, favicon (копируются в site/assets)",
+    "content/": "учебный контент: modules.yml, модули с уроками, отдельные страницы",
+    ".github/workflows/ci.yml": "проверка, самотесты и сборка на каждый push/PR",
+    ".github/workflows/pages.yml": "публикация собранного сайта на GitHub Pages",
+    ".github/workflows/docs-sync.yml": "автообновление docs/STATE.md и MANIFEST.json",
+    ".github/workflows/healthcheck.yml": "еженедельная проверка сборки с созданием issue",
+    "AGENTS.md": "правила работы для человека и агента: что делать после правок",
+    "docs/CONTENT_GUIDE.md": "формат контента: front matter, врезки, схемы, квизы",
+    "docs/ARCHITECTURE.md": "устройство генератора и как расширять",
+    "docs/CHANGELOG.md": "журнал изменений курса"
+  }
+}
