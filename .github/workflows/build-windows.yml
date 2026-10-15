@@ -11,12 +11,12 @@ permissions:
 jobs:
   validate-course:
     name: Validate Russian course content
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: '3.x'
       - name: Run content tests
@@ -30,9 +30,9 @@ jobs:
     needs: validate-course
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Set up .NET 8
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: 8.0.x
       - name: Publish Windows application
@@ -49,7 +49,7 @@ jobs:
         shell: pwsh
         run: Compress-Archive -Path 'artifacts/GitHubCourse-win-x64/*' -DestinationPath 'artifacts/GitHubCourse-win-x64.zip' -Force
       - name: Upload Windows build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: GitHubCourse-Windows-x64
           path: artifacts/GitHubCourse-win-x64.zip
