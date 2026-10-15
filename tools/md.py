@@ -19,6 +19,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import html
 import re
 from typing import Callable
@@ -309,7 +310,8 @@ class MarkdownRenderer:
                 options.append((mark.lower() == "x", text.strip()))
             elif line.strip():
                 explanation.append(line.strip())
-        item_id = f"quiz-{len(self.toc)}-{abs(hash(question)) % 100000}"
+        digest = hashlib.md5(question.encode("utf-8")).hexdigest()[:6]
+        item_id = f"quiz-{digest}"
         html_opts = []
         for idx, (correct, text) in enumerate(options):
             html_opts.append(
@@ -318,7 +320,7 @@ class MarkdownRenderer:
                 f'<span class="quiz__text">{self._inline(text)}</span></button>'
             )
         explain = (
-            f'<div class="quiz__explain">{self._inline(" ".join(explanation))}</div>'
+            f'<div class="quiz__explain" hidden>{self._inline(" ".join(explanation))}</div>'
             if explanation
             else ""
         )
@@ -496,7 +498,12 @@ class MarkdownRenderer:
                 break
             buf.append(line.strip())
             i += 1
-        out.append(f"<p>{self._inline(' '.join(buf))}</p>")
+        inner = self._inline(" ".join(buf))
+        # Одиночная иллюстрация не оборачивается в <p>: <figure> внутри абзаца невалиден.
+        if inner.startswith("<figure>") and inner.endswith("</figure>"):
+            out.append(inner)
+        else:
+            out.append(f"<p>{inner}</p>")
         return i
 
     # ------------------------------------------------------------ инлайн-слой

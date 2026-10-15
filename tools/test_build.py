@@ -159,6 +159,22 @@ class TestMarkdown(unittest.TestCase):
         self.assertEqual(out.count('data-correct="0"'), 2)
         self.assertIn("quiz__explain", out)
 
+    def test_quiz_id_is_stable(self):
+        """id вопроса не должен зависеть от PYTHONHASHSEED: сборка обязана быть воспроизводимой."""
+        first = self.renderer().render("::: quiz Вопрос?\n- (x) Да\n- ( ) Нет\n\nПояснение.\n:::\n")
+        second = self.renderer().render("::: quiz Вопрос?\n- (x) Да\n- ( ) Нет\n\nПояснение.\n:::\n")
+        self.assertEqual(first, second)
+        self.assertIn('id="quiz-', first)
+
+    def test_quiz_explanation_is_hidden_until_answer(self):
+        out = self.renderer().render("::: quiz Вопрос?\n- (x) Да\n- ( ) Нет\n\nПояснение.\n:::\n")
+        self.assertIn('class="quiz__explain" hidden', out)
+
+    def test_standalone_figure_is_not_wrapped_in_paragraph(self):
+        out = self.renderer().render('![Схема](assets/img/x.svg "Подпись")\n')
+        self.assertTrue(out.startswith("<figure>"))
+        self.assertNotIn("<p><figure>", out)
+
     def test_image_uses_resolver(self):
         out = self.renderer().render('![Схема](assets/img/diagrams/three-trees.svg "Подпись")\n')
         self.assertIn('<figure>', out)
