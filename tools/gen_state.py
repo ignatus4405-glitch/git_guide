@@ -20,6 +20,7 @@ from pathlib import Path
 
 from . import gen_diagrams
 from .content import Site
+from .templates import plural
 
 BANNER = "<!-- ФАЙЛ СГЕНЕРИРОВАН АВТОМАТИЧЕСКИ (tools/gen_state.py) — НЕ ПРАВИТЬ ВРУЧНУЮ -->"
 
@@ -168,8 +169,10 @@ def state_markdown(site: Site, info: dict, root: Path) -> str:
 
 ## 1. Что это за проект
 
-Учебный курс по Git и GitHub: {stats.get('lessons', 0)} уроков в {stats.get('modules', 0)} модулях,
-≈{stats.get('minutes', 0)} минут чтения, {stats.get('quizzes', 0)} вопросов самопроверки,
+Учебный курс по Git и GitHub: {stats.get('lessons', 0)} {plural(stats.get('lessons', 0), 'урок', 'урока', 'уроков')}
+в {stats.get('modules', 0)} {plural(stats.get('modules', 0), 'модуле', 'модулях', 'модулях')},
+≈{stats.get('minutes', 0)} {plural(stats.get('minutes', 0), 'минута', 'минуты', 'минут')} чтения,
+{stats.get('quizzes', 0)} {plural(stats.get('quizzes', 0), 'вопрос', 'вопроса', 'вопросов')} самопроверки,
 {len(gen_diagrams.DIAGRAMS)} SVG-схем. Курс хранится как markdown, собирается в статический
 сайт самим репозиторием: зависимостей нет, нужен только Python 3.10+.
 
