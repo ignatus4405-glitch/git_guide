@@ -1,0 +1,14 @@
+# Dependabot следит за версиями действий в workflow: обновления приходят PR-ами,
+# а CI сразу проверяет, что сборка курса не сломалась.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore(actions)"
+    labels:
+      - chore

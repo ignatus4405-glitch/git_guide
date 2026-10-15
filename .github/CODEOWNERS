@@ -1,0 +1,10 @@
+# Владельцы областей: в связке с правилом ветки «Require review from Code Owners»
+# их автоматически добавляют ревьюерами к Pull Request.
+#
+# Замените @ignatus4405-glitch на свою команду или аккаунты, если форкнете проект.
+
+*                       @ignatus4405-glitch
+/content/               @ignatus4405-glitch
+/tools/                 @ignatus4405-glitch
+/.github/workflows/     @ignatus4405-glitch
+/docs/                  @ignatus4405-glitch

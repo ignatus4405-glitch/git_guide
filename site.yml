@@ -1,0 +1,27 @@
+# Конфигурация сайта курса.
+# Изменяя этот файл, вы меняете метаданные сборки: build.py читает его первым.
+title: "Git и GitHub: полный курс"
+short_title: "Git · GitHub"
+description: >-
+  Полный интерактивный курс по Git и GitHub: от первого коммита до GitHub Actions,
+  code review, безопасности и автоматизации. Схемы, разборы, упражнения и шпаргалки.
+lang: "ru"
+author: "Arena Agent"
+
+# base_url используется только для canonical/OG-разметки и sitemap.
+# Внутренние ссылки на сайте относительные, поэтому сайт работает и с file://,
+# и из подкаталога вида /git_guide/.
+base_url: "https://ignatus4405-glitch.github.io/git_guide"
+repo: "https://github.com/ignatus4405-glitch/git_guide"
+repo_branch: "main"
+license: "MIT"
+
+version: "1.0.0"
+course_level: "От новичка до уверенного инженера"
+build_date_key: "updated"
+
+theme:
+  accent: "#f05033"      # фирменный оранжевый Git
+  accent2: "#2f81f7"     # синий GitHub
+  accent3: "#3fb950"     # зелёный merge
+  accent4: "#a371f7"     # фиолетовый Actions

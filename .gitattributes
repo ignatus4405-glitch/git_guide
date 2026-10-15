@@ -1,0 +1,18 @@
+# Единый стиль переводов строк в репозитории (LF), CRLF — только там, где нужен.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Бинарные файлы Git не должен пытаться сливать построчно.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.zip binary
+*.gz binary
+
+# Генератор и собранный сайт не влияют на статистику языков репозитория.
+site/* linguist-generated=true
+assets/img/diagrams/* linguist-generated=true
+docs/MANIFEST.json linguist-generated=true

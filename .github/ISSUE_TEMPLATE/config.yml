@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Протокол работы над курсом
+    url: https://github.com/ignatus4405-glitch/git_guide/blob/main/AGENTS.md
+    about: Как собрать курс локально, что проверять и что обновлять после изменений.
+  - name: Формат контента
+    url: https://github.com/ignatus4405-glitch/git_guide/blob/main/docs/CONTENT_GUIDE.md
+    about: Front matter урока, врезки, квизы, схемы и токены сборки.
