@@ -1,0 +1,59 @@
+# Порядок модулей курса. Порядок уроков внутри модуля задаётся полем order
+# во front matter файла урока (или числовым префиксом имени файла).
+# Добавляя модуль, создайте каталог content/<dir>/ и положите туда уроки и,
+# при желании, index.md с обзором модуля (иначе обзор соберётся автоматически).
+- id: git-osnovy
+  dir: 01-osnovy
+  title: "Основы Git"
+  description: "Зачем нужен контроль версий, установка и настройка, первый коммит и понимание трёх «деревьев» Git."
+  icon: "🌱"
+  level: "Новичок"
+
+- id: istoriya
+  dir: 02-istoriya
+  title: "История, ветки, отмена"
+  description: "Коммиты и их чтение, ветки и слияния, конфликты, rebase, отмена ошибок и reflog."
+  icon: "🌿"
+  level: "Новичок"
+
+- id: github
+  dir: 03-github
+  title: "GitHub: репозитории и Pull Request"
+  description: "Удалённые репозитории, синхронизация, полный цикл Pull Request, GitHub Flow и защита веток."
+  icon: "🐙"
+  level: "Средний"
+
+- id: komanda
+  dir: 04-komanda
+  title: "Командная работа"
+  description: "Code review, Issues, Projects, шаблоны и правила, которые делают правки предсказуемыми."
+  icon: "🤝"
+  level: "Средний"
+
+- id: actions
+  dir: 05-actions
+  title: "GitHub Actions: CI/CD"
+  description: "Workflow, триггеры, матрицы, кэш, артефакты, секреты и разбор пайплайна этого курса."
+  icon: "⚙️"
+  level: "Продвинутый"
+
+- id: pages
+  dir: 06-pages
+  title: "Публикация на GitHub Pages"
+  description: "Как из репозитория получается сайт: источники публикации, deploy из Actions, свой домен."
+  icon: "🚀"
+  level: "Средний"
+
+- id: bezopasnost
+  dir: 07-bezopasnost
+  title: "Безопасность и секреты"
+  description: "Аутентификация, ключи и токены, хранение секретов, защита истории от утечек."
+  icon: "🛡️"
+  level: "Средний"
+
+- id: prodvinutye
+  dir: 08-prodvinutye
+  title: "Продвинутые приёмы"
+  description: "Хуки и шаблоны, большие файлы и подмодули, релизы и теги, устройство Git под капотом."
+  icon: "🧙"
+  level: "Продвинутый"
