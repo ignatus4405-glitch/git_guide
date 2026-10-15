@@ -2,7 +2,7 @@
 
 ## Кратко
 
-Первая версия офлайн-приложения для изучения Git и GitHub на Windows реализована в этой ветке. Основной продукт — WPF/.NET 8 приложение, исходники курса — `Course/lessons.json`, Windows ZIP собирается GitHub Actions. Локальные Python-валидация и тесты проходят. Первые два CI-запуска помогли найти отсутствующие импорты `System.IO`; после исправлений workflow [#38812752754](https://github.com/ignatus4405-glitch/git_guide/actions/runs/38812752754) успешно выполнил оба job и загрузил Windows ZIP размером 66,242,840 байт. Затем обновлены major-версии Actions и Ubuntu runner; новое выполнение должно подтвердить это обновление.
+Первая версия офлайн-приложения для изучения Git и GitHub на Windows реализована в этой ветке. Основной продукт — WPF/.NET 8 приложение, исходники курса — `Course/lessons.json`, Windows ZIP собирается GitHub Actions. Локальные Python-валидация и тесты проходят. Первые два CI-запуска помогли найти отсутствующие импорты `System.IO`; после исправлений workflow [#38812752754](https://github.com/ignatus4405-glitch/git_guide/actions/runs/38812752754) успешно выполнил оба job. Затем обновлены major-версии Actions и Ubuntu runner; workflow [#38813051222](https://github.com/ignatus4405-glitch/git_guide/actions/runs/38813051222) тоже прошёл полностью и собрал Windows ZIP размером 66,242,803 байта.
 
 ## Готово
 
