@@ -1,0 +1,100 @@
+# Основной CI курса: проверка контента → самотесты → сборка сайта.
+# Запускается на каждый push в любую ветку, на Pull Request и вручную.
+# Разбор этого файла есть в уроке «Разбор: как собирается этот курс».
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+# Новые push в ту же ветку отменяют устаревшие прогоны — экономия минут Actions.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+# Токену достаточно чтения: workflow ничего не публикует и не коммитит.
+permissions:
+  contents: read
+
+jobs:
+  # ------------------------------------------------------------------ контент
+  validate:
+    name: Проверка контента
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Зависимости не нужны — только стандартная библиотека
+        run: python3 --version
+      - name: Проверить структуру курса, метаданные и ссылки
+        run: python3 tools/validate.py --strict
+
+  # -------------------------------------------------------------------- тесты
+  test:
+    name: Самотесты сборки
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Прогнать тесты генератора (35 проверок)
+        run: python3 tools/test_build.py
+
+  # -------------------------------------------------------------------- сборка
+  build:
+    name: Сборка сайта курса
+    needs: [validate, test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # нужна история: даты уроков берутся из git log
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Собрать сайт (контент → HTML, схемы, поиск, sitemap)
+        run: python3 build.py
+      - name: Проверить ссылки в собранном сайте
+        run: python3 tools/validate.py --site site --strict
+      - name: Кратко о курсе в сводке прогона
+        run: |
+          python3 - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json, pathlib
+          info = json.loads(pathlib.Path("site/build-info.json").read_text(encoding="utf-8"))
+          stats = info["stats"]
+          print("## Сборка курса\n")
+          print(f"- Ревизия: `{info['revision']}` (ветка `{info['branch']}`)")
+          print(f"- Модулей: **{stats['modules']}**, уроков: **{stats['lessons']}**, страниц: **{stats['pages']}**")
+          print(f"- Слов: **{stats['words']}**, минут чтения: **≈{stats['minutes']}**")
+          print(f"- Вопросов самопроверки: **{stats['quizzes']}**, блоков кода: **{stats['code_blocks']}**")
+          print(f"- Файлов в сборке: **{len(info['files'])}**, предупреждений: **{len(info['warnings'])}**")
+          PY
+      - name: Загрузить сайт как артефакт
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-${{ github.sha }}
+          path: site
+          retention-days: 14
+          if-no-files-found: error
+
+  # ------------------------------------------------------------------ контроль
+  summary:
+    name: Итог прогона
+    needs: [validate, test, build]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Проверить, что все задачи прошли
+        run: |
+          if [ "${{ needs.validate.result }}" != "success" ] \
+             || [ "${{ needs.test.result }}" != "success" ] \
+             || [ "${{ needs.build.result }}" != "success" ]; then
+            echo "::error::Часть проверок не прошла: validate=${{ needs.validate.result }}, test=${{ needs.test.result }}, build=${{ needs.build.result }}"
+            exit 1
+          fi
+          echo "Все проверки курса зелёные: контент валиден, тесты пройдены, сайт собирается."

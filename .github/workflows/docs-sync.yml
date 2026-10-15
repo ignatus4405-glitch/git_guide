@@ -1,0 +1,50 @@
+# Автообновление документации состояния репозитория.
+#
+# Зачем: любой человек или агент, продолжающий работу, должен видеть актуальные
+# docs/STATE.md и docs/MANIFEST.json. Они генерируются сборкой, поэтому на каждый push
+# в main workflow пересобирает курс и коммитит изменения документации.
+#
+# Важно: коммит содержит [skip ci], иначе он запустит этот workflow снова — и так по кругу.
+name: Синхронизация документации
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: docs-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    name: Обновить docs/STATE.md и docs/MANIFEST.json
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0 # полная история нужна, чтобы даты уроков брались из git log
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Пересобрать курс (обновляет документацию состояния)
+        run: python3 build.py
+      - name: Закоммитить изменения документации, если они есть
+        run: |
+          if git diff --quiet -- docs/; then
+            echo "Документация уже актуальна — коммит не нужен." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          git commit -m "docs: автообновление карты репозитория [skip ci]"
+          git push
+          {
+            echo "### Документация обновлена автоматически"
+            echo ""
+            echo 'Изменены `docs/STATE.md` и/или `docs/MANIFEST.json` — в них зафиксирован текущий состав курса.'
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -1,0 +1,83 @@
+# Публикация собранного курса на GitHub Pages.
+# Требует одного ручного действия: Settings → Pages → Build and deployment → Source: GitHub Actions.
+# Пока Pages не включён, job-ы публикации аккуратно пропускаются (прогон остаётся зелёным),
+# а в сводке прогона появляется подсказка, что именно включить.
+name: Публикация на GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Публикации не отменяем: пусть каждая завершится, чтобы не оставить сайт в промежуточном состоянии.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Проверить, включён ли Pages
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.detect.outputs.enabled }}
+    steps:
+      - id: detect
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh api "repos/$GITHUB_REPOSITORY/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages включён — публикация будет выполнена."
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "### GitHub Pages пока не включён"
+              echo ""
+              echo "Включите его один раз: **Settings → Pages → Build and deployment → Source: GitHub Actions**."
+              echo "После этого повторный push в \`main\` опубликует сайт автоматически сюда:"
+              echo "\`https://${GITHUB_REPOSITORY_OWNER}.github.io/${GITHUB_REPOSITORY#*/}/\`"
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  build:
+    name: Сборка сайта
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Собрать сайт
+        run: python3 build.py
+      - name: Проверить ссылки собранного сайта
+        run: python3 tools/validate.py --site site --strict
+      - name: Настроить Pages
+        if: needs.check.outputs.enabled == 'true'
+        uses: actions/configure-pages@v5
+      - name: Загрузить артефакт для публикации
+        if: needs.check.outputs.enabled == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    name: Опубликовать
+    needs: [check, build]
+    if: needs.check.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Показать адрес сайта
+        run: echo "Сайт курса опубликован: ${{ steps.deployment.outputs.page_url }}" >> "$GITHUB_STEP_SUMMARY"

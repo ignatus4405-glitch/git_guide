@@ -1,0 +1,61 @@
+# Еженедельная проверка курса по расписанию.
+#
+# Ошибки внешнего мира (обновления раннеров, устаревшие ссылки в тексте, изменения
+# в публичных API) проявляются не в момент коммита, а позже. Этот workflow собирает
+# и проверяет курс каждую неделю и открывает issue, если что-то сломалось.
+name: Еженедельная проверка
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # каждый понедельник в 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  healthcheck:
+    name: Сборка и проверка курса
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Проверка контента
+        run: python3 tools/validate.py --strict
+      - name: Самотесты сборки
+        run: python3 tools/test_build.py
+      - name: Сборка сайта и проверка ссылок
+        run: |
+          python3 build.py
+          python3 tools/validate.py --site site --strict
+
+  report:
+    name: Сообщить о проблеме
+    needs: healthcheck
+    if: failure()
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Создать issue с описанием сбоя
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh issue create \
+            --title "Еженедельная проверка курса: сборка или проверки падают" \
+            --body "Автоматическая проверка по расписанию завершилась ошибкой.
+
+          - Прогон: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          - Ревизия: \`${{ github.sha }}\`
+          - Дата: ${{ github.run_started_at }}
+
+          Что сделать: открыть лог прогона (\`gh run view ${{ github.run_id }} --log-failed\`),
+          воспроизвести проблему локально командами из README и починить.
+          После исправления issue можно закрывать: следующий прогон подтвердит результат." \
+            --label bug
