@@ -1,0 +1,29 @@
+# Локальные проверки перед коммитом. Разбор — в уроке «Хуки, шаблоны и .gitattributes».
+# Установка: pipx install pre-commit && pre-commit install
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: ["--markdown-linebreak-ext=md"]
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=1024"]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+  - repo: local
+    hooks:
+      - id: course-validate
+        name: Проверка контента курса
+        entry: python3 tools/validate.py --strict
+        language: system
+        pass_filenames: false
+        files: ^(content/|tools/|site\.yml)
+      - id: course-build
+        name: Сборка курса
+        entry: python3 build.py --quiet
+        language: system
+        pass_filenames: false
+        files: ^(content/|tools/|assets/|site\.yml|build\.py)
